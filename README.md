@@ -83,7 +83,7 @@ npx skill-crucible badge report.json -o badge.svg
 Then in your README:
 
 ```markdown
-![skill crucible](https://raw.githubusercontent.com/YOUR_USER/skill-crucible/main/badge.svg)
+![skill crucible](https://raw.githubusercontent.com/Dikaaff/skill-crucible/main/badge.svg)
 ```
 
 Badges render locally (no server, no account) — exactly like the coverage badges that spread `codecov` across millions of READMEs.
@@ -102,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: YOUR_USER/skill-crucible@v0.1.0
+      - uses: Dikaaff/skill-crucible@v0.1.0
         with:
           path: "."
           fail-on: high
