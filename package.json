@@ -12,14 +12,16 @@
   "files": [
     "bin",
     "src",
-    "action.yml"
+    "action.yml",
+    "SKILL.md"
   ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "test": "node --test",
-    "selfcheck": "node bin/crucible.js check test/fixtures/good-skill"
+    "selfcheck": "node bin/crucible.js check test/fixtures/good-skill",
+    "badge": "node bin/crucible.js check SKILL.md --format json -o crucible-report.json --badge badge.svg --fail-on none"
   },
   "keywords": [
     "agent-skills",

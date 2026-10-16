@@ -22,7 +22,9 @@ export function discoverSkills(inputPath) {
   } catch {
     throw new Error(`path not found: ${inputPath}`);
   }
-  if (stat.isFile()) return [makeUnit(abs, path.dirname(abs), abs)];
+  if (stat.isFile()) {
+    return [{ main: abs, dir: path.dirname(abs), root: path.dirname(abs), name: path.basename(path.dirname(abs)), files: [abs] }];
+  }
   const mains = [];
   walk(abs, mains, 0);
   return mains.map((main) => makeUnit(main, path.dirname(main), abs));
