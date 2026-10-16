@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --no-fund --no-audit
+      - run: npm test
+      - name: Self-check (clean fixture must pass the gate)
+        run: node bin/crucible.js check test/fixtures/good-skill --fail-on high
+      - name: Malicious fixture must fail the gate
+        run: |
+          if node bin/crucible.js check test/fixtures/malicious-skill --fail-on high; then
+            echo "malicious fixture unexpectedly passed" >&2
+            exit 1
+          fi

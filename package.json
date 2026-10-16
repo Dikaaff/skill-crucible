@@ -1,0 +1,41 @@
+{
+  "name": "skill-crucible",
+  "version": "0.1.0",
+  "description": "Evidence lab for agent skills: static checks, security scan, score, and verified badges for any SKILL.md",
+  "type": "module",
+  "bin": {
+    "crucible": "bin/crucible.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "action.yml"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "selfcheck": "node bin/crucible.js check test/fixtures/good-skill"
+  },
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "skill",
+    "skll-md",
+    "security",
+    "prompt-injection",
+    "linter",
+    "static-analysis",
+    "badge",
+    "ai-agents",
+    "supply-chain"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

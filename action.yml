@@ -1,0 +1,45 @@
+name: "Skill Crucible"
+description: "Static checks, security scan, and score for agent skills (SKILL.md) — SARIF output for GitHub code scanning"
+author: "skill-crucible"
+branding:
+  icon: shield
+  color: red
+inputs:
+  path:
+    description: "Path to scan for skills"
+    required: false
+    default: "."
+  format:
+    description: "Report format: text | json | sarif"
+    required: false
+    default: "sarif"
+  output:
+    description: "Report file path (used for json/sarif)"
+    required: false
+    default: "crucible.sarif"
+  fail-on:
+    description: "Fail the step at or above this severity: critical | high | medium | low | info | none"
+    required: false
+    default: "high"
+  online:
+    description: "Verify npx/pip package names against the real registry (true|false)"
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - name: Install skill-crucible
+      shell: bash
+      run: npm install --prefix "$GITHUB_ACTION_PATH" --omit=dev --no-fund --no-audit
+    - name: Run skill-crucible
+      shell: bash
+      run: |
+        ARGS=(check "${{ inputs.path }}" --format "${{ inputs.format }}" --fail-on "${{ inputs.fail-on }}" --no-color)
+        if [ "${{ inputs.online }}" = "true" ]; then ARGS+=(--online); fi
+        if [ "${{ inputs.format }}" != "text" ]; then ARGS+=(-o "${{ inputs.output }}"); fi
+        node "$GITHUB_ACTION_PATH/bin/crucible.js" "${ARGS[@]}"
+    - name: Write job summary
+      if: always()
+      shell: bash
+      run: |
+        node "$GITHUB_ACTION_PATH/bin/crucible.js" check "${{ inputs.path }}" --fail-on none --no-color >> "$GITHUB_STEP_SUMMARY" || true

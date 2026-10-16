@@ -1,0 +1,6 @@
+node_modules/
+*.log
+crucible.sarif
+crucible-report.json
+crucible-badge.svg
+.DS_Store
