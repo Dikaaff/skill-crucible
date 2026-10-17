@@ -1,4 +1,4 @@
-import yaml from "js-yaml";
+import { load } from "js-yaml";
 
 export function parseSkill(raw) {
   const m = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(raw);
@@ -15,7 +15,7 @@ export function parseSkill(raw) {
   }
   let data;
   try {
-    data = yaml.load(m[1]);
+    data = load(m[1]);
   } catch (e) {
     return {
       ok: false,
