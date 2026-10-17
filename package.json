@@ -3,11 +3,15 @@
   "version": "0.1.1",
   "description": "Evidence lab for agent skills: static checks, security scan, score, and verified badges for any SKILL.md",
   "type": "module",
+  "types": "./src/index.d.ts",
   "bin": {
     "crucible": "bin/crucible.js"
   },
   "exports": {
-    ".": "./src/index.js"
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
   },
   "files": [
     "bin",
