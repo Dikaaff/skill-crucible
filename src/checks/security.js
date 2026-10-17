@@ -1,5 +1,11 @@
 import { lineOfIndex } from "../frontmatter.js";
 
+// Declarative detection rules for untrusted skill content.
+// Every entry below is data: a regex plus a message. The literals are attack
+// signatures to match against files being scanned - prompt-injection phrasing,
+// shell one-liners, credential paths, exfiltration shapes. Nothing in this table
+// is ever executed, imported, or fetched; the only runtime action is running
+// these regular expressions over text.
 const RULES = [
   {
     id: "prompt-override/ignore-instructions",

@@ -199,6 +199,18 @@ Honest scope: this is fast **static analysis, not a sandbox**. It never executes
 - [ ] **State of Skills** — monthly scan of thousands of public skills, published openly
 - [ ] **Public badge registry** — verified scores at a glance
 
+## Security posture (and why scanners flag this source)
+
+This package ships attack signatures on purpose: prompt-injection phrases, shell one-liners, credential paths, exfiltration patterns. They are **match patterns in a rules table**, never executed. Static and AI-based scanners (Socket included) flag the source for containing them, along with the URL fragments used to describe attack shapes. That is expected for a detector - the signatures have to be present to be matched.
+
+What the tool is actually allowed to do at runtime, in full:
+
+- Read the files inside the skill folder you point it at
+- Write the report and badge to the paths you pass to `-o` / `--badge`
+- Open the network **only** in `--online` mode, and only to `registry.npmjs.org` and `pypi.org`
+
+No install scripts, no `child_process`, no `eval`, no telemetry, no postinstall hooks. One dependency (`js-yaml`), pinned by lockfile. Every release is published from GitHub Actions with a **SLSA provenance attestation** (`publishConfig.provenance` is on, so a local publish cannot impersonate a release) - verify with `npm audit signatures`.
+
 ## Contributing & license
 
 Issues, rules, and false-positive reports all welcome — the rule set grows with the attack surface.
