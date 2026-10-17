@@ -1,6 +1,6 @@
 {
   "name": "skill-crucible",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Evidence lab for agent skills: static checks, security scan, score, and verified badges for any SKILL.md",
   "type": "module",
   "bin": {
@@ -13,7 +13,8 @@
     "bin",
     "src",
     "action.yml",
-    "SKILL.md"
+    "SKILL.md",
+    "SECURITY.md"
   ],
   "engines": {
     "node": ">=20"
@@ -37,6 +38,19 @@
     "supply-chain"
   ],
   "license": "MIT",
+  "author": "Dikaaff (https://github.com/Dikaaff)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dikaaff/skill-crucible.git"
+  },
+  "homepage": "https://github.com/Dikaaff/skill-crucible#readme",
+  "bugs": {
+    "url": "https://github.com/Dikaaff/skill-crucible/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "dependencies": {
     "js-yaml": "^4.1.0"
   }
