@@ -1,6 +1,6 @@
 {
   "name": "skill-crucible",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Evidence lab for agent skills: static checks, security scan, score, and verified badges for any SKILL.md",
   "type": "module",
   "types": "./src/index.d.ts",
